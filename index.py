@@ -9,7 +9,7 @@ lifters = ['Taylor Atwood', 'Chris Duffin', 'Stefi Cohen', 'Russel Orhii']
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return 'Hello, changes'
 
 @app.route('/lifter')
 def getLifter():
