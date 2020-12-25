@@ -91,7 +91,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
       - package-zappa:
           requires:
             - build-and-test
