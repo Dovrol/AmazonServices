@@ -14,6 +14,9 @@ jobs:
       - run:
           command: python -m pytest main_test.py
           name: Test
+      - run:
+          command: python -m flake8 main_test.py
+          name: Lint
 
 workflows:
   main:
