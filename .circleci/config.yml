@@ -20,30 +20,30 @@ jobs:
       - run:
           command: ./venv/bin/flake8 main_test.py
           name: Lint
-          
-  deploy-lambda:
-    executor: python/default
-    steps:
-      - checkout
-      - run:
-          command: python -m venv venv
-          name: Creating venv
-      - run:
-          command: ./venv/bin/pip install -r requirements.txt
-          name: Install requirements
-      - run:
-        command: ./venv/bin/zappa update
-        name: deploy production
+
+  # deploy-lambda:
+  #   executor: python/default
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         command: python -m venv venv
+  #         name: Creating venv
+  #     - run:
+  #         command: ./venv/bin/pip install -r requirements.txt
+  #         name: Install requirements
+  #     - run:
+  #       command: ./venv/bin/zappa update
+  #       name: deploy production
 
 workflows:
   main:
     jobs:
       - build-and-test
-      - deploy-lambda:
-        requires:
-          - build-and-test
-        filters:
-          branches:
-            only:
-              -master
+      # - deploy-lambda:
+      #   requires:
+      #     - build-and-test
+      #   filters:
+      #     branches:
+      #       only:
+      #         -master
           
