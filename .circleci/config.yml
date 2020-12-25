@@ -80,20 +80,20 @@ workflows:
   main:
     jobs:
       - build-and-test
-      - approve-deploy
-        type: approval
-        requires:
-          - build-and-test
-      - deploy-lambda
-        requires:
-          - build-and-test
-          - approve-deploy
-        filters:
-          branches:
-            only:
-              - master
-      - package-zappa
-        requires:
-          - build-and-test
+      - approve-deploy:
+          type: approval
+          requires:
+            - build-and-test
+      - deploy-lambda:
+          requires:
+            - build-and-test
+            - approve-deploy
+          filters:
+            branches:
+              only:
+                - master
+      - package-zappa:
+          requires:
+            - build-and-test
 
           
