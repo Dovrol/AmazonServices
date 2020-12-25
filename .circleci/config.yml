@@ -20,7 +20,7 @@ jobs:
       - run:
           command: ./venv/bin/flake8 main_test.py
           name: Lint
-jobs:
+          
   deploy-lambda:
     executor: python/default
     steps:
