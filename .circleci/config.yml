@@ -21,6 +21,7 @@ jobs:
           command: ./venv/bin/flake8 main_test.py
           name: Lint
 
+
   deploy-lambda:
     executor: python/default
     steps:
@@ -32,8 +33,8 @@ jobs:
           command: ./venv/bin/pip install -r requirements.txt
           name: Install requirements
       - run:
-        command: ./venv/bin/zappa update
-        name: Deploy production
+          command: ./venv/bin/zappa update
+          name: Deploy production
 
 workflows:
   main:
