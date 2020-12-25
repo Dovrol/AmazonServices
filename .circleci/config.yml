@@ -5,7 +5,8 @@ orbs:
 
 jobs:
   build-and-test:
-    executor: python/default
+    docker:
+      - image: circleci/python:3.8
     steps:
       - checkout
       - run:
@@ -23,7 +24,8 @@ jobs:
 
 
   deploy-lambda:
-    executor: python/default
+    docker:
+      - image: circleci/python:3.8
     steps:
       - checkout
       - run:
