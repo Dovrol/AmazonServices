@@ -18,7 +18,7 @@ jobs:
           command: ./venv/bin/pytest main_test.py
           name: Test
       - run:
-          command:./venv/bin/flake8 main_test.py
+          command: ./venv/bin/flake8 main_test.py
           name: Lint
 jobs:
   deploy-lambda:
