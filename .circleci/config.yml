@@ -8,17 +8,42 @@ jobs:
     executor: python/default
     steps:
       - checkout
-      - python/load-cache
-      - python/install-deps
-      - python/save-cache
       - run:
-          command: python -m pytest main_test.py
+          command: python -m venv venv
+          name: Creating venv
+      - run:
+          command: ./venv/bin/pip install -r requirements.txt
+          name: Install requirements
+      - run:
+          command: ./venv/bin/pytest main_test.py
           name: Test
       - run:
-          command: python -m flake8 main_test.py
+          command:./venv/bin/flake8 main_test.py
           name: Lint
+jobs:
+  deploy-lambda:
+    executor: python/default
+    steps:
+      - checkout
+      - run:
+          command: python -m venv venv
+          name: Creating venv
+      - run:
+          command: ./venv/bin/pip install -r requirements.txt
+          name: Install requirements
+      - run:
+        command: ./venv/bin/zappa update
+        name: deploy production
 
 workflows:
   main:
     jobs:
       - build-and-test
+      - deploy-lambda:
+        requires:
+          - build-and-test
+        filters:
+          branches:
+            only:
+              -master
+          
